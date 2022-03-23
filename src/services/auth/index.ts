@@ -20,7 +20,7 @@ export const api = createApi({
             const { token } = response.data
             dispatch(setToken(token))
           })
-          .catch((err) => {
+          .catch(() => {
             dispatch(setToken(null))
           })
       },
