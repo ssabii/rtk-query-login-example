@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '..'
 
 interface AuthState {
   isLoggedIn: boolean
@@ -24,3 +25,5 @@ const slice = createSlice({
 export const { setToken } = slice.actions
 
 export default slice.reducer
+
+export const selectAuth = (state: RootState) => state.auth

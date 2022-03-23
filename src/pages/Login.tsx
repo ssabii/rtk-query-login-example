@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { PrivateState } from '../routes'
 import { useLoginMutation } from '../services/auth'
 import { LoginRequest } from '../services/auth/types'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const { state } = useLocation()
+
   const [form, setForm] = useState<LoginRequest>({
     email: '',
     password: '',
@@ -25,6 +30,12 @@ const Login = () => {
 
     await login(form)
       .unwrap()
+      .then(() => {
+        const privateState = state as PrivateState
+
+        if (privateState) navigate(privateState.from)
+        else navigate('/')
+      })
       .catch((e) => {
         setError(e.data?.error)
       })
