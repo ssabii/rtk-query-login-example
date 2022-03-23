@@ -14,11 +14,13 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setToken: (state, { payload }: PayloadAction<string>) => {
+    setToken: (state, { payload }: PayloadAction<string | null>) => {
       state.isLoggedIn = payload !== null
       state.token = payload
     },
   },
 })
+
+export const { setToken } = slice.actions
 
 export default slice.reducer
